@@ -3,112 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klassik-Rettungsspiel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        select, button {
-            padding: 10px;
-            margin: 5px 0;
-        }
-    </style>
+    <title>Klassik-Retter Generator</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Finde heraus, wie die Klassik gerettet werden kann!</h1>
-        <form id="form">
-            <label for="birthday">Dein Geburtstag:</label>
-            <select id="birthday" name="birthday">
-                <option value="01">Thomas Gottschalk</option>
-                <option value="02">Axel Brüggemann</option>
-                <!-- Weitere Optionen hier -->
-            </select>
-
-            <label for="month">Dein Geburtsmonat:</label>
-            <select id="month" name="month">
-                <option value="01">Januar</option>
-                <option value="02">Februar</option>
-                <!-- Weitere Optionen hier -->
-            </select>
-
-            <label for="firstname">Dein Vorname beginnt mit:</label>
-            <select id="firstname" name="firstname">
-                <option value="A">kritisch mit</option>
-                <option value="B">künstlerisch tiefschürfend mit</option>
-                <!-- Weitere Optionen hier -->
-            </select>
-
-            <label for="lastname">Dein Nachname beginnt mit:</label>
-            <select id="lastname" name="lastname">
-                <option value="A">populären Stars von RTL und Co.</option>
-                <option value="B">Felix Lobrecht</option>
-                <!-- Weitere Optionen hier -->
-            </select>
-
-            <label for="year">Du bist geboren im Jahr:</label>
-            <select id="year" name="year">
-                <option value="1930">1930</option>
-                <option value="1931">1931</option>
-                <!-- Weitere Optionen hier -->
-            </select>
-
-            <button type="button" onclick="generateResult()">Ergebnis anzeigen</button>
-        </form>
-
-        <div id="result" style="margin-top: 20px;">
-            <!-- Ergebnis wird hier angezeigt -->
-        </div>
-    </div>
+    <h1>Klassik-Retter Generator</h1>
+    <form id="generator-form">
+        <label for="day">Geburtstag:</label>
+        <select id="day">
+            <!-- Tage von 1 bis 31 -->
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
+        </select>
+        <br><br>
+        <label for="month">Geburtsmonat:</label>
+        <select id="month">
+            <option value="01">Januar</option>
+            <option value="02">Februar</option>
+            <option value="03">März</option>
+            <option value="04">April</option>
+            <option value="05">Mai</option>
+            <option value="06">Juni</option>
+            <option value="07">Juli</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">Oktober</option>
+            <option value="11">November</option>
+            <option value="12">Dezember</option>
+        </select>
+        <br><br>
+        <label for="firstName">Vorname:</label>
+        <input type="text" id="firstName" maxlength="1" placeholder="Buchstabe">
+        <br><br>
+        <label for="lastName">Nachname:</label>
+        <input type="text" id="lastName" maxlength="1" placeholder="Buchstabe">
+        <br><br>
+        <label for="year">Geburtsjahr:</label>
+        <input type="text" id="year" maxlength="4" placeholder="Jahr">
+        <br><br>
+        <button type="button" onclick="generateSentence()">Satz generieren</button>
+    </form>
+    <br>
+    <h2>Ergebnis:</h2>
+    <p id="result"></p>
 
     <script>
-        const results = {
-            birthday: {
-                "01": "Thomas Gottschalk",
-                "02": "Axel Brüggemann",
-                // Weitere Zuordnungen hier
-            },
-            month: {
-                "01": "in für die jungen Leute coolen Spielorten",
-                "02": "in weiten Teilen der Gesellschaft",
-                // Weitere Zuordnungen hier
-            },
-            firstname: {
-                "A": "kritisch mit",
-                "B": "künstlerisch tiefschürfend mit",
-                // Weitere Zuordnungen hier
-            },
-            lastname: {
-                "A": "populären Stars von RTL und Co.",
-                "B": "Felix Lobrecht",
-                // Weitere Zuordnungen hier
-            },
-            year: {
-                "1930": "etwas gegen die Altersdiskriminierung im Konzertleben tut.",
-                "1931": "endlich Walter Kollo wiederentdeckt.",
-                // Weitere Zuordnungen hier
-            }
+        // Ergebnisse für die Geburtstage
+        const dayResults = {
+            "01": "Thomas Gottschalk",
+            "02": "Axel Brüggemann",
+            "03": "Clara Schumann",
+            "04": "TwoSet Violin",
+            "05": "Norman Lebrecht",
+            "06": "Harald Schmidt",
+            "07": "Katharina Wagner",
+            "08": "Anne-Sophie Mutter",
+            "09": "Barbara Schöneberger",
+            "10": "der öffentlich-rechtliche Rundfunk",
+            "11": "Ludovico Einaudi",
+            "12": "André Rieu",
+            "13": "Daniel Hope",
+            "14": "Martin Grubinger",
+            "15": "Joana Mallwitz",
+            "16": "das Deutsche Symphonie-Orchester Berlin",
+            "17": "Götz Alsmann",
+            "18": "der Typ von der »Sendung mit der Maus«",
+            "19": "Christian Thielemann",
+            "20": "Sol Gabetta",
+            "21": "Teodor Currentzis",
+            "22": "Joko Winterscheidt",
+            "23": "Siegfried Mauser",
+            "24": "Igor Levit",
+            "25": "Justus Frantz",
+            "26": "Max Richter",
+            "27": "Richard Clayderman",
+            "28": "Sir Simon Rattle",
+            "29": "das VAN Magazin",
+            "30": "Nigel Kennedy",
+            "31": "Patricia Kopatchinskaja"
         };
 
-        function generateResult() {
-            const birthday = document.getElementById('birthday').value;
+        // Ergebnisse für die Geburtsmonate
+        const monthResults = {
+            "01": "in für die jungen Leute coolen Spielorten",
+            "02": "in weiten Teilen der Gesellschaft",
+            "03": "auf allen Streamingdiensten",
+            "04": "in Justizvollzugsanstalten",
+            "05": "in den Schulen",
+            "06": "in sozial benachteiligten Familien",
+            "07": "in möglichst vielen Medien",
+            "08": "in Bund, Länder und Gemeinden",
+            "09": "in Bayreuth",
+            "10": "in ohrenöffnender und begeisternder Weise",
+            "11": "in den Musikschulen",
+            "12": "bereits in den Kindergärten"
+        };
+
+        // Ergebnisse für die Vornamen (erster Buchstabe)
+        const firstNameResults = {
+            "A": "kritisch mit",
+            "B": "künstlerisch tiefschürfend mit",
+            "C": "ideenreich, witzig und innovativ mit",
+            "D": "Musiktheatervermittlungsformate erfindet und mit",
+            "E": "gedankenversunken mit",
+            "F": "ganz ungezwungen, humorvoll mit",
+            "G": "luzide und pointiert mit",
+            "H": "und darüber hinaus mit",
+            "I": "ganz verinnerlicht musikalisch mit",
+            "J": "wegkommt von dieser ganzen Wokeness und mit",
+            "K": "heute besser als morgen mit",
+            "L": "extrem innovative Formate kreiert und mit",
+            "M": "mit einem Bier in der Hand an der Seite von",
+            "N": "frei von jeglichem Elite-Denken mit",
+            "O": "auf neu gedeuteten Orffschen Instrumentarium mit",
+            "P": "niedrigschwellig mit",
+            "Q": "ruhig etwas »fishy« mit",
+            "R": "den Komponierenden gleichsam auf die Schliche kommt und mit",
+            "S": "Hand in Hand mit",
+            "T": "das wunderbare Rätsel dieser, unserer herrlichen Musik diskutiert und mit",
+            "U": "im Verbund mit einer nachhaltigen Kulturpolitik sowie mit",
+            "V": "für die Kulturszene in Deutschland, Österreich und der Schweiz und mit",
+            "W": "bei »Eintritt frei« und zusammen mit",
+            "X": "völlig gechillt mit",
+            "Y": "ruhig politisch unkorrekt mit",
+            "Z": "fernab jeglicher »Einstiegshürden« mit"
+        };
+
+        // Ergebnisse für die Nachnamen (erster Buchstabe)
+        const lastNameResults = {
+            "A": "populären Stars von RTL und Co.",
+            "B": "Felix Lobrecht",
+            "C": "den Kleinsten von uns",
+            "D": "Jörg Thadeusz",
+            "E": "Anke Engelke",
+            "F": "Chilly Gonzalez",
+            "G": "den Bayreuther Festspielen",
+            "H": "bekannten Netflix-Serienstars",
+            "I": "internationalen Stars",
+            "J": "dem Konzerthausorchester Berlin",
+            "K": "Mitarbeiter:innen des SWR",
+            "L": "türöffnenden Influencer:innen",
+            "M": "prominenten und kulturaffinen Fußballspielern",
+            "N": "den Kaulitz-Brüdern",
+            "O": "beliebten Deutsch-Rapper:innen",
+            "P": "einem Cocktail oder Longdrink in der Hand",
+            "Q": "den Nachfahren von Johann Joachim Quantz",
+            "R": "Klaas Heufer-Umlauf",
+            "S": "Taylor Swift",
+            "T": "Lena Meyer-Landrut",
+            "U": "Jan Böhmermann",
+            "V": "Stars wie Matthias Schweighöfer",
+            "W": "Lang Lang",
+            "X": "den Nachfahren Xaver Scharwenkas",
+            "Y": "Yuja Wang",
+            "Z": "Angela Merkel"
+        };
+
+        // Ergebnisse für die Geburtsjahre
+        const yearResults = {
+            "1930": "etwas gegen die Altersdiskriminierung im Konzertleben tut.",
+            "1931": "endlich Walter Kollo wiederentdeckt.",
+            "1932": "auch mal wieder an die Musik von Paul Hindemith denkt!",
+            "1933": "ausschließlich deutsche Künstler an deutschen Opernhäusern fordert.",
+            "1934": "den reichen Volksliedschatz Deutschlands wiederentdeckt.",
+            "1935": "auch mal Fünfe gerade sein lässt.",
+            "1936": "die Gendersprache gesetzlich verbietet.",
+            "1937": "jedem deutschen Kind das Spiel eines Instruments ermöglicht.",
+            "1938": "den Anschluss an den musikalischen Alltag aller Menschen in Deutschland findet.",
+            "1939": "endlich auch mal kämpferische Forderungen an die Politik stellt.",
+            "1940": "pädagogische Konzepte gründlicher und flächendeckender kommuniziert.",
+            "1941": "die Musik von Harald Genzmer wiederentdeckt.",
+            "1942": "die Blasmusikwerke von Wolfgang Fortner aufs Programm setzt.",
+            "1943": "Schostakowitsch neu denkt.",
+            "1944": "zeigt, dass Klassik nicht nur etwas für alte Leute ist.",
+            "1945": "auf Politikerinnen und Politiker mit Forderungen massiv einwirkt.",
+            "1946": "auch mal darauf hinweist, wie dankbar wir sein können, dass wir Beethoven und Mozart haben!",
+            "1947": "auch mal das »Rockige« an Mahler und Bruckner entdeckt!",
+            "1948": "auch mal was Flottes, zum Beispiel von den Beatles, vom Orchester spielen lässt.",
+            "1949": "mehr russische Musik auf die Programme setzt.",
+            "1950": "diesen starren Apparat, den wir »Orchester« nennen, endlich institutionell aufbricht.",
+            "1951": "hinterfragt, ob wir wirklich noch den Begriff »Generalmusikdirektor« brauchen.",
+            "1952": "das ganze System fickt.",
+            "1953": "alle Philharmonien niederbrennt.",
+            "1954": "für fransige Jeans im Konzertsaal plädiert.",
+            "1955": "Musik einfach mal politischer denkt.",
+            "1956": "das Gendern im Konzertsaal per Gesetz verbietet.",
+            "1957": "bewusst macht, dass es ein Geschenk Gottes ist, Musik machen und hören zu dürfen.",
+            "1958": "gewährleistet, dass jedes Kind mindestens ein Instrument erlernt.",
+            "1959": "in kurzen Online-Clips auch mal erklärt, was »historisch informierte Aufführungspraxis« ist.",
+            "1960": "auch mal etwas anderes als Richard Wagner aufs Programm setzt.",
+            "1961": "auf alten wie auch auf modernem Instrumentarium improvisiert und damit Hürden abbaut.",
+            "1962": "endlich Bach-Oratorien mal szenisch aufführt.",
+            "1963": "die Musik näher zu den Menschen bringt.",
+            "1964": "die nackten Männer-Popos in Barrie-Kosky-Inszenierungen flächendeckend zur Pflicht macht.",
+            "1965": "endlich Konzerteinführungen verständlich moderiert.",
+            "1966": "das Regie-Theater abschafft, um den wahren Kern der Werke Verdis zu erkennen!",
+            "1967": "alle Beethoven-Symphonien noch einmal ganz neu ausleuchtet.",
+            "1968": "das Format »Klassik für Neurodiverse« am Konzerthaus Berlin ins Leben ruft.",
+            "1969": "auch mal ganz locker und verständlich moderierte Livestreams von zuhause aus anbietet.",
+            "1970": "auch mal barfuß auftritt.",
+            "1971": "sich für das herrliche Oeuvre von Hans Pfitzner einsetzt.",
+            "1972": "statt Brahms auch mal Reger aufs Programm setzt.",
+            "1973": "die fantastische Komplexität sinfonischer Werke für sich ganz neu entdeckt.",
+            "1974": "möglichst schnell Claudia Roth ersetzt.",
+            "1975": "zum Schlusschor aus Beethovens neunter Symphonie die AfD abschafft.",
+            "1976": "ein tiefes Verständnis für die Schönheit »unserer« Musik weckt.",
+            "1977": "versteht, dass auch Neo-Klassik große Musik sein kann.",
+            "1978": "vermittelt, dass es am Ende nicht »U« und »E«, sondern einfach nur Musik gibt!",
+            "1979": "auch mal die Zwölftontechnik in schlichten Worten erklärt.",
+            "1980": "Instagram abschafft.",
+            "1981": "entspannte Open-Air-Konzertreihen programmiert.",
+            "1982": "das Deutsch-Biedere an der Rezeption von E-Musik abstreift.",
+            "1983": "zu dem Ergebnis kommt, dass Dirigent:innen wirklich kein Mensch braucht.",
+            "1984": "die Deutsche Grammophon abschafft.",
+            "1985": "ausschließlich Programme mit Werken von Komponistinnen fordert.",
+            "1986": "regelmäßig in Yellow-Lounge-Konzerten auftritt.",
+            "1987": "dem Publikum auch mal was Ungewohntes, zum Beispiel Pfitzner, zumutet.",
+            "1988": "die spannenden und mutigen Werke von Jörg Widmann entdeckt.",
+            "1989": "auch mal Musik von vergessenen Ost-Komponisten thematisiert.",
+            "1990": "den »Opus Klassik« moderiert.",
+            "1991": "völlig innovative Podcasts moderiert.",
+            "1992": "Musikvermittlung als Pflichtschulfach einführt.",
+            "1993": "Klassikstreaming noch einmal ganz neu denkt.",
+            "1994": "Themen wie Non-Binarity auch einmal in Streichquartette einfließen lässt.",
+            "1995": "coole Konzerte zu Mozart (»Mozart yo cool!«) anbietet.",
+            "1996": "den »Opus Klassik« verbietet.",
+            "1997": "Taylor-Swift-Songs covert.",
+            "1998": "Polyamorie in Symphoniekonzerten thematisiert.",
+            "1999": "Konzerte veranstaltet, in denen kiffen nicht nur erlaubt, sondern sogar erwünscht ist.",
+            "2000": "endlich für eine Verjüngung des Klassikpublikums sorgt.",
+            "2001": "in Konzertreihen vielleicht auch mal so etwas wie »Klassik und Nu Metal« thematisiert.",
+            "2002": "die Mieten für Künstler:innen in Berlin endlich wieder bezahlbar macht.",
+            "2003": "auf Konzertprogrammen so etwas wie ein »Beethoven-Detox« passiert.",
+            "2004": "für mehr Sichtbarkeit vergessener Musik sorgt.",
+            "2005": "den ganzen Cringe im Konzertsaal (Programmhefte und Moderationen) kritisch hinterfragt.",
+            "2006": "plädiert, Handys in der Philharmonie zu erlauben.",
+            "2007": "triggernde, sexistische Inhalte in Mozart-Opern einfach mal streicht.",
+            "2008": "tolle TikTok-Ideen entwickelt.",
+            "2009": "dafür sorgt, dass meine Eltern mich nie wieder fragen, ob ich mit zum Symphoniekonzert möchte.",
+            "2010": "kommuniziert, dass es okay ist, mit Jeans zum Liederabend von Christian Gerhaher zu gehen.",
+            "2011": "bei meinen Lehrer:innen endlich ADHS diagnostiziert."
+        };
+
+        function generateSentence() {
+            const day = document.getElementById('day').value;
             const month = document.getElementById('month').value;
-            const firstname = document.getElementById('firstname').value;
-            const lastname = document.getElementById('lastname').value;
+            const firstNameInitial = document.getElementById('firstName').value.toUpperCase();
+            const lastNameInitial = document.getElementById('lastName').value.toUpperCase();
             const year = document.getElementById('year').value;
 
-            const result = `Die Klassik kann nur gerettet werden, wenn ${results.birthday[birthday]} ${results.month[month]} ${results.firstname[firstname]} ${results.lastname[lastname]} ${results.year[year]}`;
+            const dayResult = dayResults[day] || "";
+            const monthResult = monthResults[month] || "";
+            const firstNameResult = firstNameResults[firstNameInitial] || "";
+            const lastNameResult = lastNameResults[lastNameInitial] || "";
+            const yearResult = yearResults[year] || "";
 
+            const result = `Die Klassik kann nur gerettet werden, wenn ${dayResult} ${monthResult} ${firstNameResult} ${lastNameResult} ${yearResult}.`;
             document.getElementById('result').innerText = result;
         }
     </script>
