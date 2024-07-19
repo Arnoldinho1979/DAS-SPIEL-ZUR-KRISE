@@ -254,8 +254,7 @@
     <button onclick="shareOnBluesky()">Auf Bluesky teilen</button>
     <button onclick="shareOnX()">Auf X teilen</button>
 </div>
-
-<script>
+    
     function copyToClipboard() {
         const result = document.getElementById('result').innerText;
         navigator.clipboard.writeText(result).then(function() {
