@@ -210,6 +210,26 @@
 </select>
         <br><br>
         <button type="button" onclick="generateSentence()">Persönlichen Power-Satz generieren</button>
+        <button type="button" onclick="generateRandomSentence()">Zufälligen Power-Satz generieren</button>
+
+<script>
+    function getRandomElement(obj) {
+        const keys = Object.keys(obj);
+        return obj[keys[Math.floor(Math.random() * keys.length)]];
+    }
+
+    function generateRandomSentence() {
+        const randomDayResult = getRandomElement(dayResults);
+        const randomMonthResult = getRandomElement(monthResults);
+        const randomFirstNameResult = getRandomElement(firstNameResults);
+        const randomLastNameResult = getRandomElement(lastNameResults);
+        const randomYearResult = getRandomElement(yearResults);
+
+        const randomSentence = `${randomDayResult} ${randomMonthResult} ${randomFirstNameResult} ${randomLastNameResult} ${randomYearResult}`;
+        document.getElementById("result").innerText = randomSentence;
+    }
+</script>
+
     </form>
     <br>
     <h2>Dein persönlicher Klassik-Krisen-Lösungs-Power-Satz:</h2>
