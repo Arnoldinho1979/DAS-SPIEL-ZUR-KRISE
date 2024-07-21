@@ -210,58 +210,9 @@
 </select>
         <br><br>
         <button type="button" onclick="generateSentence()">Persönlichen Power-Satz generieren</button>
-        <button type="button" onclick="generateRandomSentence()">Zufälligen Power-Satz generieren</button>
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KLAREPO-GEN! Der Klassik-Rettungs-Powersatz-Generator</title>
-</head>
-<body>
-    <h1>Das Spiel zur Klassik-Krise!</h1>
-    <form id="generator-form">
-        <!-- Bestehender Code für die Dropdowns und die Schaltfläche zum Generieren des persönlichen Power-Satzes -->
-        
-        <!-- Deine Dropdowns und Labels hier -->
-
-        <button type="button" onclick="generatePowerPhrase()">Generiere deinen Power-Satz!</button>
-        <br><br>
-        <button type="button" onclick="generateRandomPowerPhrase()">Zufälligen Power-Satz generieren</button>
-    </form>
-
-    <p id="result"></p>
-
-    <script>
-        // Bestehende generatePowerPhrase-Funktion
-        
-        function generateRandomPowerPhrase() {
-            const dayIndex = Math.floor(Math.random() * phrases.day.length);
-            const monthIndex = Math.floor(Math.random() * phrases.month.length);
-            const firstNameIndex = Math.floor(Math.random() * phrases.firstName.length);
-            const lastNameIndex = Math.floor(Math.random() * phrases.lastName.length);
-            const yearIndex = Math.floor(Math.random() * phrases.year.length);
-
-            const randomPowerPhrase = `Die Klassik kann nur gerettet werden ${phrases.day[dayIndex]} ${phrases.month[monthIndex]} ${phrases.firstName[firstNameIndex]} ${phrases.lastName[lastNameIndex]} ${phrases.year[yearIndex]}.`;
-
-            document.getElementById('result').innerText = randomPowerPhrase;
-        }
-
-        const phrases = {
-            day: ["durch Tag1", "durch Tag2", "durch Tag3"], // Füge hier deine tatsächlichen Phrasen ein
-            month: ["Monat1", "Monat2", "Monat3"],
-            firstName: ["Vorname1", "Vorname2", "Vorname3"],
-            lastName: ["Nachname1", "Nachname2", "Nachname3"],
-            year: ["Jahr1", "Jahr2", "Jahr3"]
-        };
-    </script>
-</body>
-</html>
-
-
     </form>
     <br>
-    <h2>Dein persönlicher Klassik-Krisen-Lösungs-Power-Satz:</h2>
+    <h2>Dein persönlicher Klassik-Krisen-Lösungs-Powersatz:</h2>
     <p id="result"></p>
 <br>
     <script>
